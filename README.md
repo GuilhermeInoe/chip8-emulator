@@ -12,8 +12,6 @@ Este projeto é uma implementação da máquina virtual **Chip-8**, desenvolvida
 - [O que é Chip-8?](#-o-que-é-chip-8)
 - [✨ Funcionalidades](#-funcionalidades)
 - [📸 Screenshots](#-screenshots)
-- [🛠️ Tecnologias e Dependências](#-tecnologias-e-dependências)
-- [⚙️ Compilação e Instalação](#️-compilação-e-instalação)
 - [🚀 Como Executar](#-como-executar)
 - [⌨️ Mapeamento do Teclado](#️-mapeamento-do-teclado)
 - [🎯 Status do Projeto](#-status-do-projeto)
@@ -56,49 +54,18 @@ Para compilar e executar este projeto, você precisará das seguintes ferramenta
 - **Build System**: `CMake` (versão 3.10 ou superior) ou `Make`.
 - **Biblioteca Gráfica**: `SDL2` (Simple DirectMedia Layer).
 
-## ⚙️ Compilação e Instalação
-
-Siga os passos abaixo para compilar o projeto em um sistema baseado em Debian/Ubuntu (Linux).
-
-**1. Clone o repositório:**
-```sh
-git clone [https://github.com/GuilhermeInoe/chip8-virtual-machine](https://github.com/GuilhermeInoe/chip8-virtual-machine)
-cd seu-repositorio
-```
-
-**2. Instale as dependências:**
-```sh
-sudo apt-get update
-sudo apt-get install build-essential cmake libsdl2-dev
-```
-
-**3. Compile o projeto com CMake:**
-```sh
-mkdir build
-cd build
-cmake ..
-make
-```
-
-Após a compilação, o executável `chip8_emulator` será criado no diretório `build`.
 
 ## 🚀 Como Executar
-
-A sintaxe básica para executar o programa é:
-
+Primeiro, compile o projeto
 ```sh
-./chip8_emulator [opções] caminho/para/a/rom.ch8
+make all
+```
+Após, execute:
+```sh
+./chip8 1-chip8-logo.ch8
 ```
 
-### Opções de Linha de Comando
 
-- `--clock <velocidade>`: Define a velocidade do clock da CPU em Hz. Padrão: `500`.
-  - **Exemplo:** `./chip8_emulator --clock 700 roms/tetris.ch8`
-
-- `--scale <fator>`: Define o fator de escala da janela. Um fator de `10` resulta em uma janela de `640x320`. Padrão: `10`.
-  - **Exemplo:** `./chip8_emulator --scale 15 roms/pong.ch8`
-
-- `--help`: Exibe uma mensagem de ajuda com todas as opções.
 
 ## ⌨️ Mapeamento do Teclado
 
