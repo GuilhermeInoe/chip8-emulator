@@ -11,17 +11,30 @@ void VM_CarregarROM(VM* vm,
                     uint16_t pc_inicial){
 
     FILE* rom = fopen(arq_rom, "rb");
+    if (rom == NULL) {
+        perror("ERRO! arquivo ROM está vazio ou não existe!");
+        exit(EXIT_FAILURE);
+    }
+
     fseek(rom, 0, SEEK_END);
     int tam_rom = ftell(rom);
     rewind(rom);
 
     fread(&vm->RAM[pc_inicial], 1, tam_rom, rom);
+    if (pc_inicial + tam_rom > sizeof(vm->RAM)) {
+        fprintf(stderr, "ROM muito grande para a memória da VM! Deve ser menor que 4KB\n");
+        exit(EXIT_FAILURE);
+    }
 
     fclose(rom);
 
 }
 
 void VM_ExecutarInstrucao(VM* vm){
+    if (vm->PC + 1 >= sizeof(vm->RAM)) {
+        fprintf(stderr, "ERRO: PC fora dos limites da memória (4KB)\n");
+        exit(EXIT_FAILURE);
+    }
     uint16_t inst = (vm->RAM[vm->PC] << 8) 
                     | vm->RAM[vm->PC+1];
 
@@ -46,8 +59,13 @@ void VM_ExecutarInstrucao(VM* vm){
                 break;
             }else if(inst == 0x00EE){
                 //RET: The interpreter sets the program counter to the address at the top of the stack, then subtracts 1 from the stack pointer.
+                //Adição de validação para evitar falha de segmentação
+                if (vm->SP == 0) {
+                    fprintf(stderr, "ERRO: Stack underflow em RET!\n");
+                    exit(EXIT_FAILURE);
+                }
                 vm->SP--;
-                vm->PC = vm->STACK[vm->SP];
+                vm->PC = vm->stack[vm->SP];
             }
 
             break;
