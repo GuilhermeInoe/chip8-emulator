@@ -5,7 +5,7 @@
 void VM_Inicializar(VM* vm, uint16_t pc_inicial){
     vm->PC = pc_inicial;
 }
-
+//asdas
 void VM_CarregarROM(VM* vm, 
                     char* arq_rom, 
                     uint16_t pc_inicial){
