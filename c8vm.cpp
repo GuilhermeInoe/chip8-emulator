@@ -54,8 +54,6 @@ void VM::VM_ExecutarInstrucao(){
                 }
                 break;
             }else if(inst == 0x00EE){
-                //RET: The interpreter sets the program counter to the address at the top of the stack, then subtracts 1 from the stack pointer.
-                //Adição de validação para evitar falha de segmentação
                 if (this->SP == 0) {
                     fprintf(stderr, "ERRO: Stack underflow em RET!\n");
                     exit(EXIT_FAILURE);
@@ -64,6 +62,35 @@ void VM::VM_ExecutarInstrucao(){
                 this->PC = this->stack[this->SP];
             }
             break;
+        
+        case 0xA:
+            this->I = NNN;  
+            break;
+
+        case 0xD:
+            {
+                uint8_t x_pos = this->V[X] % 64; // A tela tem 64 colunas
+                uint8_t y_pos = this->V[Y] % 32; // A tela tem 32 linhas
+                uint8_t n_lines = N;             // Número de bytes do sprite
+                
+                this->V[0xF] = 0;
+
+                for (int i = 0; i < n_lines; i++) {
+                    uint8_t sprite_line = this->RAM[this->I + i]; 
+                    for (int j = 0; j < 8; j++) {
+                        int x = (x_pos + j) % 64; 
+                        int y = (y_pos + i) % 32; 
+
+                        if ((sprite_line & (0x80 >> j)) != 0) {
+                            if (this->DISPLAY[y * 64 + x] == 1) {
+                                this->V[0xF] = 1;
+                            }
+                            this->DISPLAY[y * 64 + x] ^= 1;
+                        }
+                    }
+                }
+                break;
+            }
 
         case 6:
             this->V[X] = NN;
