@@ -10,18 +10,17 @@ int main(int argc, char** argv){
     }
 
     VM vm;
-    vm.VM_Inicializar(&vm, 0x200);
-    
-    vm.VM_CarregarROM(&vm, argv[1], 0x200);
+    vm.VM_Inicializar(0x200); 
+    vm.VM_CarregarROM(argv[1], 0x200);
 
     #ifdef DEBUG
-    vm.VM_ImprimirRegistradores(&vm);
+    vm.VM_ImprimirRegistradores();
     #endif
 
     while(1){
-        vm.VM_ExecutarInstrucao(&vm);
+        vm.VM_ExecutarInstrucao();
         #ifdef DEBUG
-        vm.VM_ImprimirRegistradores(&vm);
+        vm.VM_ImprimirRegistradores();
         #endif
     }
 }
