@@ -62,7 +62,7 @@ make all
 ```
 Após, execute:
 ```sh
-./chip8 1-chip8-logo.ch8
+./chip8 "arquivos de teste/NOME_DO_ARQUIVO"
 ```
 
 
