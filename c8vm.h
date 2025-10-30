@@ -20,7 +20,7 @@ public:
     void VM_ExecutarInstrucao();
 
     void VM_ProcessarInput(uint8_t key_index, bool is_down);
-    void VM_DesenharDisplay(); 
+    
     void VM_ProcessarTimers(); 
 
     void VM_ImprimirRegistradores();
