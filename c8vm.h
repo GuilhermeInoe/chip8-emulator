@@ -1,6 +1,8 @@
 #include <stdint.h>
 #include "defs.h" // Inclui o CHIP8_KEYS
 
+//Autores: Guilherme Inoe, Winicius Abilio
+
 class VM {
 public:
     uint8_t RAM[4096];      // Memória 4KB
