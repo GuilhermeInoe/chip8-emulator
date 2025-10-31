@@ -5,6 +5,8 @@
 #include <string.h>
 #include <SDL2/SDL.h>
 
+//Autores: Guilherme Inoe, Winicius Abilio
+
 // Valores padrão
 const int DEFAULT_CHIP8_HZ = 700;
 const int DEFAULT_SCALE = 10;
